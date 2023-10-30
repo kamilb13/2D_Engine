@@ -34,7 +34,7 @@ private:
         return final_time.str();
     }
 
-
+    
 
 public:
     sf::RectangleShape rectangle(sf::Color color, int width, int height, int x, int y) {
@@ -47,10 +47,8 @@ public:
 
     void game() {
         auto start_time = std::chrono::high_resolution_clock::now();
-
-        float speed = 10.f;
-
         sf::Clock framerate_clock;
+        float speed = 10.f;
 
         while(window.isOpen()) {
             sf::Event event;
