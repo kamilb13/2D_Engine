@@ -11,6 +11,7 @@
 class Engine {
 private:
     sf::RenderWindow window;
+    sf::RectangleShape rect;
 
     void exit() {
         window.close();
@@ -33,13 +34,19 @@ private:
         return final_time.str();
     }
 
+
+
 public:
+    sf::RectangleShape rectangle(sf::Color color, int width, int height, int x, int y) {
+        rect.setFillColor(color);
+        rect.setPosition(x, y);
+        rect.setSize(sf::Vector2f(x, y));
+
+        return rect;
+    }
+
     void game() {
         auto start_time = std::chrono::high_resolution_clock::now();
-
-        sf::RectangleShape rectangle(sf::Vector2f(100, 100));
-        rectangle.setFillColor(sf::Color::Green);
-        rectangle.setPosition(150, 150);
 
         float speed = 10.f;
 
@@ -60,22 +67,22 @@ public:
                 switch (event.type) {
                     case sf::Event::Closed:
                         window.close();
-                        break;
+                        break;  
                     case sf::Event::KeyPressed:
                         if (event.key.code == sf::Keyboard::Escape) {
                             exit();
                             std::cout << timer(start_time) + "exit" << std::endl;
                         } else if (event.key.code == sf::Keyboard::Left) {
-                            rectangle.move(-speed, 0.f);
+                            rect.move(-speed, 0.f);
                             std::cout << timer(start_time) + "left arrow" << std::endl;
                         } else if (event.key.code == sf::Keyboard::Right) {
-                            rectangle.move(speed, 0);
+                            rect.move(speed, 0);
                             std::cout << timer(start_time) + "right arrow" << std::endl;
                         } else if (event.key.code == sf::Keyboard::Up) {
-                            rectangle.move(0, -speed);
+                            rect.move(0, -speed);
                             std::cout << timer(start_time) + "up arrow" << std::endl;
                         } else if (event.key.code == sf::Keyboard::Down) {
-                            rectangle.move(0, speed);
+                            rect.move(0, speed);
                             std::cout << timer(start_time) + "down arrow" << std::endl;
                         }
                         break;
@@ -91,7 +98,7 @@ public:
                 }
             }
             window.clear(sf::Color::Black);
-            window.draw(rectangle);
+            window.draw(rect);
             window.draw(framerate);
             window.display();
         }
