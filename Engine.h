@@ -7,11 +7,15 @@
 #include <string>
 #include <chrono>
 #include <iomanip>
+#include <vector>
+#include "Player.h"
+#include "PlayerEventListener.hpp"
 
 class Engine {
 private:
     sf::RenderWindow window;
     sf::RectangleShape rect;
+    std::vector<sf::RectangleShape> redRectangles; 
 
     void exit() {
         window.close();
@@ -34,32 +38,31 @@ private:
         return final_time.str();
     }
 
-    
+
 
 public:
-    sf::RectangleShape rectangle(sf::Color color, int width, int height, int x, int y) {
-        rect.setFillColor(color);
-        rect.setPosition(x, y);
-        rect.setSize(sf::Vector2f(x, y));
 
-        return rect;
-    }
+    Player* player;
+    PlayerEventListener* playerEventListener;
 
     void game() {
         auto start_time = std::chrono::high_resolution_clock::now();
-        sf::Clock framerate_clock;
+
         float speed = 10.f;
+        player = new Player(100.0f, 100.0f, 100, 100, speed);
+        playerEventListener = new PlayerEventListener(player);
+
+        sf::Clock framerate_clock;
 
         while(window.isOpen()) {
             sf::Event event;
 
             //licznik fps
-            sf::Font framerate_font;
-            framerate_font.loadFromFile("../resources/fonts/arial.ttf");
-            int fps = (int (1.f / framerate_clock.getElapsedTime().asSeconds()));
-            sf::Text framerate(std::to_string(fps), framerate_font, 20);
-            framerate.setFillColor(sf::Color::White);
-            framerate_clock.restart();
+
+
+            float rotation = 0;
+
+            
 
             while(window.pollEvent(event)) {
                 switch (event.type) {
@@ -67,25 +70,14 @@ public:
                         window.close();
                         break;  
                     case sf::Event::KeyPressed:
-                        if (event.key.code == sf::Keyboard::Escape) {
-                            exit();
-                            std::cout << timer(start_time) + "exit" << std::endl;
-                        } else if (event.key.code == sf::Keyboard::Left) {
-                            rect.move(-speed, 0.f);
-                            std::cout << timer(start_time) + "left arrow" << std::endl;
-                        } else if (event.key.code == sf::Keyboard::Right) {
-                            rect.move(speed, 0);
-                            std::cout << timer(start_time) + "right arrow" << std::endl;
-                        } else if (event.key.code == sf::Keyboard::Up) {
-                            rect.move(0, -speed);
-                            std::cout << timer(start_time) + "up arrow" << std::endl;
-                        } else if (event.key.code == sf::Keyboard::Down) {
-                            rect.move(0, speed);
-                            std::cout << timer(start_time) + "down arrow" << std::endl;
-                        }
+                        playerEventListener->eventHandler(event);
                         break;
                     case sf::Event::MouseButtonPressed:
                         if (event.mouseButton.button == sf::Mouse::Left) {
+                            redRectangles.push_back(sf::RectangleShape());
+                            redRectangles.back().setPosition(event.mouseButton.x, event.mouseButton.y);
+                            redRectangles.back().setSize(sf::Vector2(200.0f, 200.0f));
+                            redRectangles.back().setFillColor(sf::Color::Red);
                             std::cout << timer(start_time) + "left click" << std::endl;
                         } else if (event.mouseButton.button == sf::Mouse::Right) {
                             std::cout << timer(start_time) + "right click" << std::endl;
@@ -96,8 +88,11 @@ public:
                 }
             }
             window.clear(sf::Color::Black);
-            window.draw(rect);
-            window.draw(framerate);
+            player->drawPlayer(&window);
+
+            for(int i = 0; i < redRectangles.size(); i++){
+                window.draw(redRectangles.at(i));
+            }
             window.display();
         }
     }
@@ -115,4 +110,3 @@ public:
     }
 
 };
-
