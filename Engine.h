@@ -71,6 +71,11 @@ public:
                         break;  
                     case sf::Event::KeyPressed:
                         playerEventListener->eventHandler(event);
+
+                        if(event.key.code == sf::Keyboard::Delete && redRectangles.size() > 0){
+                            redRectangles.pop_back();
+                        }
+
                         break;
                     case sf::Event::MouseButtonPressed:
                         if (event.mouseButton.button == sf::Mouse::Left) {
