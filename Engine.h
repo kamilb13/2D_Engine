@@ -7,11 +7,16 @@
 #include <string>
 #include <chrono>
 #include <iomanip>
+#include <sstream>
+#include "Line.h"
 
 class Engine {
 private:
     sf::RenderWindow window;
     sf::RectangleShape rect;
+
+    Line linia;
+    std::vector<Line> linie;
 
     void exit() {
         window.close();
@@ -34,7 +39,7 @@ private:
         return final_time.str();
     }
 
-    
+
 
 public:
     sf::RectangleShape rectangle(sf::Color color, int width, int height, int x, int y) {
@@ -50,52 +55,76 @@ public:
         sf::Clock framerate_clock;
         float speed = 10.f;
 
-        while(window.isOpen()) {
+        while (window.isOpen()) {
             sf::Event event;
 
             //licznik fps
             sf::Font framerate_font;
-            framerate_font.loadFromFile("../resources/fonts/arial.ttf");
-            int fps = (int (1.f / framerate_clock.getElapsedTime().asSeconds()));
+            framerate_font.loadFromFile("D:/Projects/silnik-projekt/resources/fonts/arial.ttf");
+            int fps = (int(1.f / framerate_clock.getElapsedTime().asSeconds()));
             sf::Text framerate(std::to_string(fps), framerate_font, 20);
             framerate.setFillColor(sf::Color::White);
             framerate_clock.restart();
 
-            while(window.pollEvent(event)) {
+            while (window.pollEvent(event)) {
                 switch (event.type) {
-                    case sf::Event::Closed:
-                        window.close();
-                        break;  
-                    case sf::Event::KeyPressed:
-                        if (event.key.code == sf::Keyboard::Escape) {
-                            exit();
-                            std::cout << timer(start_time) + "exit" << std::endl;
-                        } else if (event.key.code == sf::Keyboard::Left) {
-                            rect.move(-speed, 0.f);
-                            std::cout << timer(start_time) + "left arrow" << std::endl;
-                        } else if (event.key.code == sf::Keyboard::Right) {
-                            rect.move(speed, 0);
-                            std::cout << timer(start_time) + "right arrow" << std::endl;
-                        } else if (event.key.code == sf::Keyboard::Up) {
-                            rect.move(0, -speed);
-                            std::cout << timer(start_time) + "up arrow" << std::endl;
-                        } else if (event.key.code == sf::Keyboard::Down) {
-                            rect.move(0, speed);
-                            std::cout << timer(start_time) + "down arrow" << std::endl;
-                        }
-                        break;
-                    case sf::Event::MouseButtonPressed:
-                        if (event.mouseButton.button == sf::Mouse::Left) {
-                            std::cout << timer(start_time) + "left click" << std::endl;
-                        } else if (event.mouseButton.button == sf::Mouse::Right) {
-                            std::cout << timer(start_time) + "right click" << std::endl;
-                        } else if (event.mouseButton.button == sf::Mouse::Middle) {
-                            std::cout << timer(start_time) + "middle click" << std::endl;
-                        }
-                        break;
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+                case sf::Event::KeyPressed:
+                    if (event.key.code == sf::Keyboard::Escape) {
+                        exit();
+                        std::cout << timer(start_time) + "exit" << std::endl;
+                    }
+                    else if (event.key.code == sf::Keyboard::Left) {
+                        rect.move(-speed, 0.f);
+                        std::cout << timer(start_time) + "left arrow" << std::endl;
+                    }
+                    else if (event.key.code == sf::Keyboard::Right) {
+                        rect.move(speed, 0);
+                        std::cout << timer(start_time) + "right arrow" << std::endl;
+                    }
+                    else if (event.key.code == sf::Keyboard::Up) {
+                        rect.move(0, -speed);
+                        std::cout << timer(start_time) + "up arrow" << std::endl;
+                    }
+                    else if (event.key.code == sf::Keyboard::Down) {
+                        rect.move(0, speed);
+                        std::cout << timer(start_time) + "down arrow" << std::endl;
+                    }
+                    break;
+                case sf::Event::MouseButtonPressed:
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                        std::cout << timer(start_time) + "left click" << std::endl;
+                    }
+                    else if (event.mouseButton.button == sf::Mouse::Right) {
+                        std::cout << timer(start_time) + "right click" << std::endl;
+                    }
+                    else if (event.mouseButton.button == sf::Mouse::Middle) {
+                        std::cout << timer(start_time) + "middle click" << std::endl;
+                    }
+                    break;
+                }
+                if (event.type == sf::Event::MouseButtonPressed) {  // dorobiæ lineEventListener
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                        linia.rozpocznijRysowanie(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+                    }
+                }
+                if (event.type == sf::Event::MouseMoved) {
+                    linia.aktualizujLinie(sf::Vector2f(event.mouseMove.x, event.mouseMove.y));
+                }
+                if (event.type == sf::Event::MouseButtonReleased) {
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                        linia.zakonczRysowanie();
+                        linie.push_back(linia);
+                    }
                 }
             }
             window.clear(sf::Color::Black);
+            for (const auto& l : linie) {
+                l.rysuj(window);
+            }
+            linia.rysuj(window);
             window.draw(rect);
             window.draw(framerate);
             window.display();
@@ -109,10 +138,10 @@ public:
     void sfml_init(bool fullscreen, int width, int height) {
         if (fullscreen) {
             window.create(sf::VideoMode::getDesktopMode(), "Engine 2D", sf::Style::Fullscreen);
-        } else {
+        }
+        else {
             window.create(sf::VideoMode(width, height), "Engine 2D", sf::Style::Default);
         }
     }
 
 };
-
