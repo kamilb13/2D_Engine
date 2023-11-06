@@ -19,9 +19,9 @@ void Rectangle::startDrawing(sf::Vector2f position) {
 
 void Rectangle::updateRectangle(sf::Vector2f position) {
     if (drawing) {
-        shape[1].position = sf::Vector2f(position.x, shape[0].position.y);
-        shape[2].position = sf::Vector2f(shape[0].position.x, position.y);
-        shape[3].position = position;
+        shape[1].position = sf::Vector2f(shape[0].position.x, position.y);
+        shape[2].position = position;
+        shape[3].position = sf::Vector2f(position.x, shape[0].position.y);
     }
 }
 
