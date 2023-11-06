@@ -19,13 +19,13 @@ private:
     Line line;
     std::vector<Line> lines;
 
-    Rectangle rectangle_c;
+    Rectangle rectangle;
     std::vector<Rectangle> rectangles;
 
     void exit();
 
 public:
-    sf::RectangleShape rectangle(sf::Color color, int width, int height, int x, int y);
+    sf::RectangleShape drawRectangle(sf::Color color, int width, int height, int x, int y);
     void game();
     void set_fps(int fps);
     void sfml_init(bool fullscreen, int width, int height);
