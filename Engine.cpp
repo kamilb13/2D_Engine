@@ -8,6 +8,11 @@ void Engine::game() {
     sf::Clock framerate_clock;
     float speed = 10.f;
 
+    rectangleEventListener = new RectangleEventListener(&(this->rectangle));
+
+    // TODO - Poprawic to rysowanie:
+    circleEventListener = new CircleEventListener(&(this->circle), &(this->window));
+
     while(window.isOpen()) {
         //licznik fps
         sf::Font framerate_font;
@@ -20,6 +25,8 @@ void Engine::game() {
         sf::Event event;
 
         while(window.pollEvent(event)) {
+            rectangleEventListener->eventHandler(event);
+            circleEventListener->eventHandler(event);
             if (event.type == sf::Event::Closed) {
                 window.close();
                 break;
@@ -40,27 +47,24 @@ void Engine::game() {
                     rect.move(0, speed);
                     std::cout << "down arrow" << std::endl;
                 }
-            } else if (event.type == sf::Event::MouseButtonPressed) {
-                if (event.mouseButton.button == sf::Mouse::Left) {
-                    line.startDrawing(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
-                    std::cout << "left click" << std::endl;
-                } else if (event.mouseButton.button == sf::Mouse::Right) {
-                    rectangle.startDrawing(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
-                    std::cout << "right click" << std::endl;
-                } else if (event.mouseButton.button == sf::Mouse::Middle) {
-                    std::cout << "middle click" << std::endl;
-                }
-            } else if (event.type == sf::Event::MouseMoved) {
-                line.updateLine(sf::Vector2f(event.mouseMove.x, event.mouseMove.y));
-                rectangle.updateRectangle(sf::Vector2f(event.mouseMove.x, event.mouseMove.y));
-            } else if (event.type == sf::Event::MouseButtonReleased) {
-                if (event.mouseButton.button == sf::Mouse::Left) {
-                    line.endDrawing();
-                    lines.push_back(line);
-                } else if (event.mouseButton.button == sf::Mouse::Right) {
-                    rectangle.endDrawing();
-                    rectangles.push_back(rectangle);
-                }
+//            } else if (event.type == sf::Event::MouseButtonPressed) {
+//                if (event.mouseButton.button == sf::Mouse::Left) {
+//                    line.startDrawing(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+//                    std::cout << "left click" << std::endl;
+//                } else if (event.mouseButton.button == sf::Mouse::Middle) {
+//                    std::cout << "middle click" << std::endl;
+//                }
+////            } else if (event.type == sf::Event::MouseMoved) {
+//                line.updateLine(sf::Vector2f(event.mouseMove.x, event.mouseMove.y));
+//                rectangle.updateRectangle(sf::Vector2f(event.mouseMove.x, event.mouseMove.y));
+//            } else if (event.type == sf::Event::MouseButtonReleased) {
+//                if (event.mouseButton.button == sf::Mouse::Left) {
+//                    line.endDrawing();
+//                    lines.push_back(line);
+//                } else if (event.mouseButton.button == sf::Mouse::Right) {
+//                    rectangle.endDrawing();
+//                    rectangles.push_back(rectangle);
+//                }
             }
         }   // koniec petli
 
@@ -75,7 +79,7 @@ void Engine::game() {
             r.draw(window);
         }
         rectangle.draw(window);
-
+        circle.draw(window);
         window.draw(rect);
         window.draw(framerate);
         window.display();

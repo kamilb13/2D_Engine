@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.0)
 project(2D_Engine)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -8,6 +8,19 @@ include_directories(.)
 add_executable(2D_Engine
         Engine.h
         main.cpp
+        Line.h
+        Rectangle.h
+        Engine.cpp
+        Line.cpp
+        Rectangle.cpp
+        RectangleEventListener.cpp
+        RectangleEventListener.h
+        Menu.cpp
+        Menu.h
+        Circle.cpp
+        Circle.h
+        CircleEventListener.cpp
+        CircleEventListener.h
 )
 
 find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)

@@ -10,6 +10,9 @@
 #include <string>
 #include "Line.h"
 #include "Rectangle.h"
+#include "RectangleEventListener.h"
+#include "Circle.h"
+#include "CircleEventListener.h"
 
 class Engine {
 private:
@@ -21,6 +24,11 @@ private:
 
     Rectangle rectangle;
     std::vector<Rectangle> rectangles;
+    RectangleEventListener *rectangleEventListener;
+
+    Circle circle;
+    std::vector<Circle> circles;
+    CircleEventListener *circleEventListener;
 
     void exit();
 
