@@ -21,6 +21,7 @@ public:
     void updateCircle(float r, sf::RenderWindow& window);
     void endDrawing();
     void draw(sf::RenderWindow& window);
+    sf::CircleShape getCircleShape();
 };
 
 

@@ -26,3 +26,7 @@ void Circle::endDrawing() {
 void Circle::draw(sf::RenderWindow& window) {
     window.draw(circleShape);
 }
+
+sf::CircleShape Circle::getCircleShape() {
+    return this->circleShape;
+}

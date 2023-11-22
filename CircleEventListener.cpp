@@ -22,10 +22,9 @@ void CircleEventListener::eventHandler(sf::Event event) {
     }
 
     if(drawing) {
-        distance = std::sqrt(std::pow(event.mouseButton.x - center.x, 2) +
-                             std::pow(event.mouseButton.y - center.y, 2));
-        std::cout << distance << std::endl;
-        circle->updateCircle(distance, *window);
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+        float radius = static_cast<float>(std::abs(mousePosition.x - circle->getCircleShape().getPosition().x));
+        circle->updateCircle(radius, *window);
         if (event.type == sf::Event::MouseButtonReleased){
             if(event.key.code == sf::Mouse::Left){
                 drawing = false;

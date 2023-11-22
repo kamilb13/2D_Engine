@@ -13,6 +13,8 @@ public:
     void updateRectangle(sf::Vector2f position);
     void endDrawing();
     void draw(sf::RenderWindow& window) const;
+
+    sf::VertexArray getShape();
 };
 
 

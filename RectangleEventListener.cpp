@@ -5,8 +5,9 @@
 #include "RectangleEventListener.h"
 
 
-RectangleEventListener::RectangleEventListener(Rectangle *rectangle){
+RectangleEventListener::RectangleEventListener(Rectangle *rectangle, sf::RenderWindow *window){
     this->rectangle = rectangle;
+    this->window = window;
 }
 
 void RectangleEventListener::eventHandler(sf::Event event) {
@@ -20,5 +21,9 @@ void RectangleEventListener::eventHandler(sf::Event event) {
             rectangle->endDrawing();
             std::cout << "right released" << std::endl;
         }
+    }
+
+    if (drawing) {
+        rectangle->updateRectangle(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
     }
 }

@@ -12,9 +12,11 @@
 class RectangleEventListener {
 private:
     Rectangle *rectangle;
+    sf::RenderWindow *window;
+    bool drawing;
 
 public:
-    RectangleEventListener(Rectangle *rectangle);
+    RectangleEventListener(Rectangle *rectangle, sf::RenderWindow *window);
 
     void eventHandler(sf::Event event);
 };

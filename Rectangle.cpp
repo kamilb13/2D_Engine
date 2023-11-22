@@ -32,3 +32,7 @@ void Rectangle::endDrawing() {
 void Rectangle::draw(sf::RenderWindow& window) const {
     window.draw(shape);
 }
+
+sf::VertexArray Rectangle::getShape() {
+    return this->shape;
+}

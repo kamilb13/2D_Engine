@@ -13,6 +13,8 @@
 #include "RectangleEventListener.h"
 #include "Circle.h"
 #include "CircleEventListener.h"
+#include "Menu.h"
+#include "LineEventListener.h"
 
 class Engine {
 private:
@@ -21,6 +23,7 @@ private:
 
     Line line;
     std::vector<Line> lines;
+    LineEventListener *lineEventListener;
 
     Rectangle rectangle;
     std::vector<Rectangle> rectangles;
@@ -29,6 +32,9 @@ private:
     Circle circle;
     std::vector<Circle> circles;
     CircleEventListener *circleEventListener;
+
+
+    Menu *menu;
 
     void exit();
 
