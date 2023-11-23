@@ -5,6 +5,8 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Window.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Audio.hpp>
+
 #include <iostream>
 #include <cmath>
 #include <string>
@@ -35,6 +37,9 @@ private:
 
 
     Menu *menu;
+
+    sf::SoundBuffer *buffer;
+    sf::Sound *sound;
 
     void exit();
 

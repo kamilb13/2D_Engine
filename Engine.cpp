@@ -1,16 +1,23 @@
 #include "Engine.h"
+#include <SFML/Audio.hpp>
+
 
 void Engine::exit() {
     window.close();
 }
 
 void Engine::game() {
+    std::cout << "Brak pliku" << std::endl;
     sf::Clock framerate_clock;
     float speed = 10.f;
 
     rectangleEventListener = new RectangleEventListener(&(this->rectangle), &(this->window), &(this->rectangles));
     circleEventListener = new CircleEventListener(&(this->circle), &(this->window), &(this->circles));
     lineEventListener = new LineEventListener(&(this->line), &(this->window), &(this->lines));
+
+    this->buffer = new sf::SoundBuffer();
+    this->sound = new sf::Sound();
+
     menu = new Menu();
 
     while(window.isOpen()) {
@@ -30,7 +37,7 @@ void Engine::game() {
 
             if (menu->getChoice() == 1){
                 circleEventListener->eventHandler(event);
-                rectangleEventListener->eventHandler(event);  // TODO 1. POPRAWIĆ TO RYSOWANIE
+                rectangleEventListener->eventHandler(event);
             } else if (menu->getChoice() == 2){
                 lineEventListener->eventHandler(event);
                 std::cout << menu->getChoice() << std::endl;
@@ -54,6 +61,12 @@ void Engine::game() {
                 } else if (event.key.code == sf::Keyboard::Down) {
                     rect.move(0, speed);
                     std::cout << "down arrow" << std::endl;
+                }else if (event.key.code == sf::Keyboard::Space) {
+                    std::cout << "SPACJA" << std::endl;
+
+                    if (!buffer->loadFromFile("sound.wav")) return;
+                    sound->setBuffer(*buffer);
+                    sound->play();
                 }
                 // TODO Przerobic ruch kwadratu na taki jak to, zeby mogl sie ruszac po skosie:
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
