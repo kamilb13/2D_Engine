@@ -55,6 +55,10 @@ void Engine::game() {
                     rect.move(0, speed);
                     std::cout << "down arrow" << std::endl;
                 }
+                // TODO Przerobic ruch kwadratu na taki jak to, zeby mogl sie ruszac po skosie:
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+                    rect.move(speed, speed);
+                }
 
             }
         }   // koniec petli
