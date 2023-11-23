@@ -8,9 +8,9 @@ void Engine::game() {
     sf::Clock framerate_clock;
     float speed = 10.f;
 
-    rectangleEventListener = new RectangleEventListener(&(this->rectangle), &(this->window));
-    circleEventListener = new CircleEventListener(&(this->circle), &(this->window));
-    lineEventListener = new LineEventListener(&(this->line), &(this->window));
+    rectangleEventListener = new RectangleEventListener(&(this->rectangle), &(this->window), &(this->rectangles));
+    circleEventListener = new CircleEventListener(&(this->circle), &(this->window), &(this->circles));
+    lineEventListener = new LineEventListener(&(this->line), &(this->window), &(this->lines));
     menu = new Menu();
 
     while(window.isOpen()) {
@@ -73,6 +73,11 @@ void Engine::game() {
         for (const auto& r : rectangles) {
             r.draw(window);
         }
+
+        for (Circle circ : circles) {
+            circ.draw(window);
+        }
+
         line.draw(window);
         rectangle.draw(window);
         circle.draw(window);

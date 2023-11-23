@@ -4,9 +4,10 @@
 
 #include "CircleEventListener.h"
 
-CircleEventListener::CircleEventListener(Circle *circle, sf::RenderWindow *window) {
+CircleEventListener::CircleEventListener(Circle *circle, sf::RenderWindow *window, std::vector<Circle> *circles) {
     this->circle = circle;
     this->window = window;
+    this->circles = circles;
 }
 
 void CircleEventListener::eventHandler(sf::Event event) {
@@ -28,6 +29,7 @@ void CircleEventListener::eventHandler(sf::Event event) {
         if (event.type == sf::Event::MouseButtonReleased){
             if(event.key.code == sf::Mouse::Left){
                 drawing = false;
+                circles->push_back(*circle);
             }
         }
     }
@@ -35,6 +37,7 @@ void CircleEventListener::eventHandler(sf::Event event) {
     else if (event.type == sf::Event::MouseButtonReleased){
         if(event.key.code == sf::Mouse::Left){
             drawing = false;
+            circles->push_back(*circle);
         }
     }
 }

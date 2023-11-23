@@ -14,10 +14,11 @@ class CircleEventListener {
 private:
     Circle *circle;
     sf::RenderWindow *window;
+    std::vector<Circle> *circles;
     bool drawing;
 
 public:
-    CircleEventListener(Circle *circle, sf::RenderWindow *window);
+    CircleEventListener(Circle *circle, sf::RenderWindow *window, std::vector<Circle> *circles);
 
     void eventHandler(sf::Event event);
 };

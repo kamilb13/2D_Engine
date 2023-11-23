@@ -23,7 +23,7 @@ void Circle::endDrawing() {
     drawing = false;
 }
 
-void Circle::draw(sf::RenderWindow& window) {
+void Circle::draw(sf::RenderWindow& window){
     window.draw(circleShape);
 }
 
