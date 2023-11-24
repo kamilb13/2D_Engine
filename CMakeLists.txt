@@ -7,5 +7,6 @@ set(BUILD_SHARED_LIBS OFF)
 FETCHCONTENT_DECLARE(SFML GIT_REPOSITORY https://github.com/SFML/SFML.git GIT_TAG 2.5.1)
 FETCHCONTENT_MAKEAVAILABLE(SFML)
 
-add_executable(2D_Engine main.cpp CircleEventListener.cpp Circle.cpp Engine.cpp Line.cpp LineEventListener.cpp Menu.cpp Rectangle.cpp RectangleEventListener.cpp)
+add_executable(2D_Engine main.cpp CircleEventListener.cpp Circle.cpp Engine.cpp Line.cpp LineEventListener.cpp Menu.cpp Rectangle.cpp RectangleEventListener.cpp
+)
 target_link_libraries(2D_Engine sfml-graphics)
