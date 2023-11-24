@@ -7,22 +7,22 @@ Line::Line() {
     shape[1].color = sf::Color::Red;
 }
 
-void Line::rozpocznijRysowanie(sf::Vector2f pozycja) {
+void Line::startDrawing(sf::Vector2f position) {
     drawing = true;
-    shape[0].position = pozycja;
-    shape[1].position = pozycja;
+    shape[0].position = position;
+    shape[1].position = position;
 }
 
-void Line::aktualizujLinie(sf::Vector2f pozycja) {
+void Line::updateLine(sf::Vector2f position) {
     if (drawing) {
-        shape[1].position = pozycja;
+        shape[1].position = position;
     }
 }
 
-void Line::zakonczRysowanie() {
+void Line::endDrawing() {
     drawing = false;
 }
 
-void Line::rysuj(sf::RenderWindow& window) const {
+void Line::draw(sf::RenderWindow& window) const {
     window.draw(shape);
 }

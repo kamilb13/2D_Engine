@@ -1,15 +1,19 @@
-#pragma once
+#ifndef LINE_H
+#define LINE_H
+
 #include <SFML/Graphics.hpp>
 
 class Line {
+private:
+    sf::VertexArray shape;
+    bool drawing;
 public:
     Line();
-    void rozpocznijRysowanie(sf::Vector2f pozycja);
-    void aktualizujLinie(sf::Vector2f pozycja);
-    void zakonczRysowanie();
-    void rysuj(sf::RenderWindow& window) const;
+    void startDrawing(sf::Vector2f position);
+    void updateLine(sf::Vector2f position);
+    void endDrawing();
+    void draw(sf::RenderWindow& window) const;
 
-private:
-    bool drawing;
-    sf::VertexArray shape;
 };
+
+#endif //LINE_H
