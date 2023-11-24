@@ -7,8 +7,6 @@
 
 #include <SFML/Graphics.hpp>
 
-
-
 class Circle {
 private:
     sf::CircleShape circleShape;

@@ -30,7 +30,7 @@ void Engine::game() {
 
             if (menu->getChoice() == 1){
                 circleEventListener->eventHandler(event);
-                rectangleEventListener->eventHandler(event);  // TODO 1. POPRAWIĆ TO RYSOWANIE
+                rectangleEventListener->eventHandler(event);
             } else if (menu->getChoice() == 2){
                 lineEventListener->eventHandler(event);
                 std::cout << menu->getChoice() << std::endl;
