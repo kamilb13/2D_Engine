@@ -15,6 +15,7 @@
 #include "CircleEventListener.h"
 #include "Menu.h"
 #include "LineEventListener.h"
+#include "BitmapRectangleEventListener.h"
 
 class Engine {
 private:
@@ -33,6 +34,9 @@ private:
     std::vector<Circle> circles;
     CircleEventListener *circleEventListener;
 
+    BitmapRectangle bitmapRectangle;
+    std::vector<BitmapRectangle> bitmapRectangles;
+    BitmapRectangleEventListener *bitmapRectangleEventListener;
 
     Menu *menu;
 
