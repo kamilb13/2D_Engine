@@ -5,8 +5,8 @@
 #include "Player.h"
 
 // Player.cpp
-#include "Player.h"
 
+/*
 Player::Player(std::vector<Rectangle> *vectorRectangle, sf::RenderWindow &window) : window(window) {
     playerShape.setSize(sf::Vector2f(50.0f, 50.0f));
     playerShape.setFillColor(sf::Color::Green);
@@ -19,6 +19,16 @@ Player::Player(std::vector<BitmapRectangle> *bitmapRectangle, sf::RenderWindow &
     playerShape.setFillColor(sf::Color::Green);
     playerShape.setPosition(200, 200);
     this->bitmapRectangles = bitmapRectangle;
+}
+ */
+
+Player::Player(float bulletSpeed, Collision &collisionManager, sf::RenderWindow &window)
+        : bulletSpeed(bulletSpeed), collisionManager(collisionManager), window(window) {
+    // Konstruktor klasy Player
+    playerShape.setSize(sf::Vector2f(50.0f, 50.0f));
+    playerShape.setFillColor(sf::Color::Green);
+    playerShape.setPosition(200, 200);
+    //this->bitmapRectangles = bitmapRectangle;
 }
 
 void Player::handleInput() {
@@ -78,6 +88,22 @@ void Player::update() {
  */
 void Player::update() {
     // Aktualizacja pozycji pocisków
+    //TODO CALA KOLIZJA W KLASIE COLLISION
+
+    collisionManager.checkBulletCollisions(bullets);
+
+    auto bulletIt = bullets.begin();
+    while (bulletIt != bullets.end()) {
+        bulletIt->move(0.0f, -bulletSpeed);
+
+        // Usunięcie pocisku, jeśli przekroczył górną granicę ekranu
+        if (bulletIt->getPosition().y < 0) {
+            bulletIt = bullets.erase(bulletIt);
+        } else {
+            ++bulletIt;
+        }
+    }
+    /*
     auto bulletIt = bullets.begin();
     while (bulletIt != bullets.end()) {
         bulletIt->move(0.0f, -bulletSpeed);
@@ -100,6 +126,7 @@ void Player::update() {
             ++bulletIt;
         }
     }
+     */
 }
 
 

@@ -9,11 +9,13 @@
 #include <vector>
 #include "Rectangle.h"
 #include "BitmapRectangle.h"
+#include "Collision.h"
 
 class Player {
 public:
-    Player(std::vector<Rectangle> *vectorRectangle, sf::RenderWindow &window);
-    Player(std::vector<BitmapRectangle>* bitmapRectangle, sf::RenderWindow &window);
+    //Player(std::vector<Rectangle> *vectorRectangle, sf::RenderWindow &window);
+    //Player(std::vector<BitmapRectangle> *bitmapRectangle, sf::RenderWindow &window);
+    Player(float bulletSpeed, Collision &collisionManager, sf::RenderWindow &window);
 
     void handleInput();
     void update();
@@ -32,6 +34,7 @@ private:
     std::vector<Rectangle>* vectorRectangles;
     std::vector<BitmapRectangle>* bitmapRectangles;
 
+    Collision& collisionManager;
 
 };
 

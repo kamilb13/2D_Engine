@@ -1,6 +1,7 @@
 #include <iostream>
 #include "ResizableBitmap.h"
 
+//TODO BEZUZYTECZNA KLASA
 ResizableBitmap::ResizableBitmap(const std::string& texturePath) : isResizing(false) {
     // Wczytaj teksturę z pliku PNG
     if (!texture.loadFromFile(texturePath)) {

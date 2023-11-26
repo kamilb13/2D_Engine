@@ -7,7 +7,7 @@
 void Engine::exit() {
     window.close();
 }
-//TODO BEZUZYTECZNA KLASA
+
 void Engine::game() {
     sf::Clock framerate_clock;
     float speed = 10.f;
@@ -20,15 +20,17 @@ void Engine::game() {
 
     menu = new Menu();
     //tablica z czym chce kolizje
-    Player *player = new Player(&(this->bitmapRectangles), window);
+    Collision collisionManager(&bitmapRectangles, 5.0f);
+
+    Player *player = new Player(5.0f,  collisionManager, window);
 
 
-    BitmapRectangle bitmapRect;
+    BitmapRectangle bitmapRect(); //
 
     // Ścieżka do pliku z bitmapą
-    std::string imagePath = "C:\\Users\\kamil\\Desktop\\Space-Invaders\\graphics\\my_ufo.png"; //C:\Users\kamil\Desktop\Space-Invaders\graphic\smy_ufo.png
+    //std::string imagePath = "C:\\Users\\kamil\\Desktop\\Space-Invaders\\graphics\\my_ufo.png"; //C:\Users\kamil\Desktop\Space-Invaders\graphic\smy_ufo.png
 
-    ResizableBitmap resizableBitmap("C:\\Users\\kamil\\Desktop\\Space-Invaders\\graphics\\my_ufo.png");
+    //ResizableBitmap resizableBitmap("C:\\Users\\kamil\\Desktop\\Space-Invaders\\graphics\\my_ufo.png");
 
     while(window.isOpen()) {
         //licznik fps

@@ -10,7 +10,7 @@
 
 class BitmapRectangle {
 public:
-    BitmapRectangle();
+    BitmapRectangle(); //std::string pathOfEnemy
     void startDrawing(sf::Vector2f position);
     void updateRectangle(sf::Vector2f position);
     void endDrawing();

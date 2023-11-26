@@ -1,7 +1,7 @@
 #include <iostream>
 #include "BitmapRectangle.h"
-
-BitmapRectangle::BitmapRectangle() : drawing(false) {
+//TODO DLACZEGO NIE MOGE Z PARAMETRU?? WYWALA BLAD ZE BRAK KONSTRUKTORA ENGINE?!?!
+BitmapRectangle::BitmapRectangle() : drawing(false) { //std::string pathOfEnemy
     // Ustawienie koloru prostokąta na przezroczysty
     shape = sf::VertexArray(sf::Quads, 4);
     shape[0].color = sf::Color::Transparent;
