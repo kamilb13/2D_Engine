@@ -15,8 +15,8 @@ RectangleEventListener::RectangleEventListener(Rectangle *rectangle, sf::RenderW
 }
 
 void RectangleEventListener::eventHandler(sf::Event event) {
-    if (event.type == sf::Event::MouseButtonPressed){
-        if(event.mouseButton.button == sf::Mouse::Right){
+    if (event.type == sf::Event::MouseButtonPressed) {
+        if (event.mouseButton.button == sf::Mouse::Right) {
             rectangle->startDrawing(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
         }
     } else if (event.type == sf::Event::MouseMoved) {

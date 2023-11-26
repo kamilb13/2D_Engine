@@ -46,6 +46,7 @@ public:
     void game();
     void set_fps(int fps);
     void sfml_init(bool fullscreen, int width, int height);
+    bool demo_init(bool enabled);
 
 };
 

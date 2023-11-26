@@ -29,7 +29,6 @@ private:
     std::vector<sf::RectangleShape> bullets;
     std::vector<Rectangle>* vectorRectangles;
 
-
 };
 
 #endif //INC_2D_ENGINE_PLAYER_H

@@ -37,13 +37,13 @@ void Engine::game() {
             } else if (menu->getChoice() == 2){
                 lineEventListener->eventHandler(event);
                 rectangleEventListener->eventHandler(event);
-//                std::cout << menu->getChoice() << std::endl
             } else if (menu->getChoice() == 3) {
                 circles.clear();
                 rectangles.clear();
                 lines.clear();
             } else if (menu->getChoice() == 4) {
                 // TODO Uruchomienie gry pod Enter
+
             }
 
             if (event.type == sf::Event::Closed) {
@@ -118,6 +118,14 @@ void Engine::sfml_init(bool fullscreen, int width, int height) {
         window.create(sf::VideoMode::getDesktopMode(), "Engine 2D", sf::Style::Fullscreen);
     } else {
         window.create(sf::VideoMode(width, height), "Engine 2D", sf::Style::Default);
+    }
+}
+
+bool Engine::demo_init(bool enabled) {
+    if (enabled) {
+        return true;
+    } else {
+        return false;
     }
 }
 
