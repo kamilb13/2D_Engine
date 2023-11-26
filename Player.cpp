@@ -2,6 +2,7 @@
 // Created by kamil on 23.11.2023.
 //
 
+#include <iostream>
 #include "Player.h"
 
 // Player.cpp
@@ -20,15 +21,23 @@ Player::Player(std::vector<BitmapRectangle> *bitmapRectangle, sf::RenderWindow &
     playerShape.setPosition(200, 200);
     this->bitmapRectangles = bitmapRectangle;
 }
- */
+*/
 
 Player::Player(float bulletSpeed, Collision &collisionManager, sf::RenderWindow &window)
         : bulletSpeed(bulletSpeed), collisionManager(collisionManager), window(window) {
     // Konstruktor klasy Player
-    playerShape.setSize(sf::Vector2f(50.0f, 50.0f));
-    playerShape.setFillColor(sf::Color::Green);
-    playerShape.setPosition(200, 200);
+    playerShape.setSize(sf::Vector2f(100.0f, 100.0f));
+    //playerShape.setFillColor(sf::Color::Green);
+    playerShape.setPosition(300, 500);
     //this->bitmapRectangles = bitmapRectangle;
+
+    // Wczytaj teksturę z pliku
+    if (playerTexture.loadFromFile("../resources/bitmaps/player.png")) {
+        playerShape.setTexture(&playerTexture); // Ustaw teksturę dla gracza
+    } else {
+        // Obsłuż błąd wczytywania tekstury
+        std::cerr << "Error loading player texture!" << std::endl;
+    }
 }
 
 void Player::handleInput() {
@@ -36,8 +45,9 @@ void Player::handleInput() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && playerShape.getPosition().y > 0) {
         playerShape.move(0, -movementSpeed);
     }
+
     // Ruch w dół
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && playerShape.getPosition().y + playerShape.getSize().y < window.getDefaultView().getSize().y) {
         playerShape.move(0, movementSpeed);
     }
     // Ruch w lewo
@@ -45,7 +55,7 @@ void Player::handleInput() {
         playerShape.move(-movementSpeed, 0);
     }
     // Ruch w prawo
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) ) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && playerShape.getPosition().x + playerShape.getSize().x < window.getDefaultView().getSize().x) {
         playerShape.move(movementSpeed, 0);
     }
 
@@ -85,7 +95,8 @@ void Player::update() {
         }
     }
 }
- */
+*/
+
 void Player::update() {
     // Aktualizacja pozycji pocisków
     //TODO CALA KOLIZJA W KLASIE COLLISION
@@ -126,11 +137,8 @@ void Player::update() {
             ++bulletIt;
         }
     }
-     */
+    */
 }
-
-
-
 
 void Player::draw() {
     window.draw(playerShape);
@@ -138,4 +146,8 @@ void Player::draw() {
     for (const auto& bullet : bullets) {
         window.draw(bullet);
     }
+}
+
+sf::RectangleShape Player::getGlobalBounds() {
+    return this->playerShape;
 }

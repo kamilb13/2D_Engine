@@ -10,19 +10,26 @@ BitmapRectangleEventListener::BitmapRectangleEventListener(BitmapRectangle* bitm
     this->bitmapRectangles = bitmapRectangles;
 }
 
-void BitmapRectangleEventListener::eventHandler(sf::Event event) {
-    if (event.type == sf::Event::MouseButtonPressed) {
-        if (event.mouseButton.button == sf::Mouse::Right) {
+void BitmapRectangleEventListener::eventHandler() { //event
+    //if (event.type == sf::Event::MouseButtonPressed) {d
+        //if (event.mouseButton.button == sf::Mouse::Right) {
             //sf::Vector2f mousePosition = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
-            bitmapRectangle->startDrawing(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
-        }
-    } else if (event.type == sf::Event::MouseMoved) {
+    bitmapRectangle->startDrawing(sf::Vector2f(500, 100));
+    bitmapRectangles->push_back(*bitmapRectangle);
+    bitmapRectangle->startDrawing(sf::Vector2f(400, 150));
+    bitmapRectangles->push_back(*bitmapRectangle);
+    bitmapRectangle->startDrawing(sf::Vector2f(300, 100));
+    bitmapRectangles->push_back(*bitmapRectangle);
+    bitmapRectangle->startDrawing(sf::Vector2f(200, 100));
+    bitmapRectangles->push_back(*bitmapRectangle);
+        //}
+    //} else if (event.type == sf::Event::MouseMoved) {
         //sf::Vector2f mousePosition = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
-        bitmapRectangle->updateRectangle(sf::Vector2f(event.mouseMove.x, event.mouseMove.y));
-    } else if (event.type == sf::Event::MouseButtonReleased) {
-        if (event.mouseButton.button == sf::Mouse::Right) {
-            bitmapRectangle->endDrawing();
-            bitmapRectangles->push_back(*bitmapRectangle);
-        }
-    }
+        //bitmapRectangle->updateRectangle(sf::Vector2f(event.mouseMove.x, event.mouseMove.y));
+   // } else if (event.type == sf::Event::MouseButtonReleased) {
+        //if (event.mouseButton.button == sf::Mouse::Right) {
+           //bitmapRectangle->endDrawing();
+
+        //}
+    //}
 }
