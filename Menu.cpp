@@ -12,14 +12,10 @@ void Menu::menuHandler(sf::Event event) {
     if (event.type == sf::Event::KeyPressed){
         if(event.key.code == sf::Keyboard::Num0){
             this->choice = 0;
-        } else if(event.key.code == sf::Keyboard::Num1){
+        }else if(event.key.code == sf::Keyboard::Num1){
             this->choice = 1;
         } else if (event.key.code == sf::Keyboard::Num2){
             this->choice = 2;
-        } else if (event.key.code == sf::Keyboard::Num3){
-            this->choice = 3;
-        } else if (event.key.code == sf::Keyboard::Enter) {
-            this->choice = 4;
         }
     }
 }
