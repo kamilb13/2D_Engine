@@ -21,7 +21,7 @@ void Collision::checkBulletCollisions(std::vector<sf::RectangleShape>& bullets) 
         for (auto rectIt = bitmapRectangles->begin(); rectIt != bitmapRectangles->end(); ++rectIt) {
             if (bulletIt->getGlobalBounds().intersects(rectIt->getGlobalBounds())) {
                 // Kolizja! Usuń prostokąt i pocisk
-                std::cout << "Collision detected!" << std::endl;
+                std::cout << "Wykryta kolizja" << std::endl;
                 bitmapRectangles->erase(rectIt);
                 removeBullet = true;
                 break; // Wyjście z pętli wewnętrznej po wykryciu kolizji
@@ -30,7 +30,7 @@ void Collision::checkBulletCollisions(std::vector<sf::RectangleShape>& bullets) 
 
         // Usunięcie pocisku, jeśli przekroczył górną granicę ekranu lub kolizja
         if (bulletIt->getPosition().y < 0 || removeBullet) {
-            std::cout << "Bullet removed!" << std::endl;
+            std::cout << "Pocisk usuniety" << std::endl;
             bulletIt = bullets.erase(bulletIt);
         } else {
             ++bulletIt;

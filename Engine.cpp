@@ -121,7 +121,6 @@ void Engine::game() {
 
         }
 
-
         window.draw(framerate);
         window.display();
     }

@@ -10,7 +10,7 @@ BitmapRectangle::BitmapRectangle() : drawing(false) { //std::string pathOfEnemy
 
     // Wczytanie tekstury z pliku PNG
     if (!texture.loadFromFile("../resources/bitmaps/my_ufo.png")) {
-        std::cerr << "Nie udało się wczytać pliku tekstury." << std::endl;
+        std::cout << "Nie udalo się wczytać pliku tekstury" << std::endl;
     }
 
     // Utworzenie sprite'a i ustawienie tekstury
@@ -23,7 +23,6 @@ void BitmapRectangle::shoot() {
         bullet.setFillColor(sf::Color::Red);
         bullet.setPosition(sprite.getPosition().x + sprite.getGlobalBounds().width / 2, sprite.getPosition().y + sprite.getGlobalBounds().height);
         bullets.push_back(bullet);
-
         shootClock.restart();
     }
 }
@@ -35,6 +34,7 @@ void BitmapRectangle::updateBullets(sf::RenderWindow &window, sf::RectangleShape
     while (bulletIt != bullets.end()) {
         bulletIt->move(0.0f, bulletSpeed);
         if(bulletIt->getGlobalBounds().intersects(playerBounds.getGlobalBounds())){
+            std::cout << "PRZEGRALES" << std::endl;
             exit(0);
         }
         // Usunięcie pocisku, jeśli przekroczył dolną granicę ekranu

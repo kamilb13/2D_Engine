@@ -4,7 +4,6 @@
 
 #include "RectangleEventListener.h"
 
-
 RectangleEventListener::RectangleEventListener(Rectangle *rectangle, sf::RenderWindow *window, std::vector<Rectangle> *rectangles){
     this->rectangle = rectangle;
     this->window = window;

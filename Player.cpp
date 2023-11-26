@@ -137,7 +137,7 @@ void Player::update() {
             ++bulletIt;
         }
     }
-     */
+    */
 }
 
 void Player::draw() {

@@ -55,8 +55,8 @@ public:
 
     /**
 * @brief Funkcja getShape
-* Funkcja zwracajaca granice prostokata
-* @return Funkcja zwraca obiekt typu sf::FloatRect
+* Funkcja zwracajaca ksztalt prostokata
+* @return Funkcja zwraca tablice sf::VertexArray
 */
     sf::VertexArray getShape();
 

@@ -1,3 +1,8 @@
+/**
+ * @file Engine.h
+ * @brief Plik naglowkowy zawierajacy definicje klasy Engine
+ */
+
 #ifndef ENGINE_H
 #define ENGINE_H
 
@@ -20,10 +25,17 @@
 #include "BitmapRectangle.h"
 #include "Enemy.h"
 
+/**
+ * @class Engine
+ * @brief Klasa glowna
+ */
 class Engine {
 private:
     sf::RenderWindow window;
     sf::RectangleShape rect;
+
+    sf::Texture texture;
+    sf::Sprite background;
 
     Line line;
     std::vector<Line> lines;
@@ -43,12 +55,39 @@ private:
 
     Menu *menu;
 
+    /**
+    * @brief Funkcja exit
+     * Funkcja konczaca wykonywanie sie programu
+     * @return Funkcja nic nie zwraca
+    */
     void exit();
 
 public:
+    /**
+* @brief Funkcja game
+* Funkcja zawierajaca glowna petle gry
+* @return Funkcja nic nie zwraca
+*/
     void game();
+
+    /**
+* @brief Funkcja set_fps
+* Funkcja ustawiajaca ilosc FPS
+     * @param fps Ilosc klatek
+* @return Funkcja nic nie zwraca
+*/
     void set_fps(int fps);
+
+    /**
+* @brief Funkcja sfml_init
+* Funkcja inicjujaca okno
+* @param fullscreen Parametr true/false decydujacy o pelnoekranowosci
+     * @param width Szerokosc okna w pixelach
+     * @param height Wysokosc okna w pixelach
+* @return Funkcja nic nie zwraca
+*/
     void sfml_init(bool fullscreen, int width, int height);
+
 };
 
 #endif //ENGINE_H
