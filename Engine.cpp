@@ -29,7 +29,7 @@ void Engine::game() {
         sf::Event event;
 
         while(window.pollEvent(event)) {
-            menu->menuHandler(event);;
+            menu->menuHandler(event);
 
             if (menu->getChoice() == 1){
                 circleEventListener->eventHandler(event);
@@ -95,9 +95,11 @@ void Engine::game() {
         player->handleInput();
         player->update();
         player->draw();
+
         enemy->draw(window);
         enemy->shoot();
         enemy->updateBullets(window, *player);
+
         line.draw(window);
         rectangle.draw(window);
         circle.draw(window);
