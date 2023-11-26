@@ -15,6 +15,8 @@ public:
     void draw(sf::RenderWindow& window) const;
 
     sf::VertexArray getShape();
+
+    sf::FloatRect getGlobalBounds() const;
 };
 
 

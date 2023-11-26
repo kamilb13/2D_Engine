@@ -15,6 +15,8 @@
 #include "CircleEventListener.h"
 #include "Menu.h"
 #include "LineEventListener.h"
+#include "Player.h"
+#include "Enemy.h"
 
 class Engine {
 private:
@@ -33,6 +35,7 @@ private:
     std::vector<Circle> circles;
     CircleEventListener *circleEventListener;
 
+    std::vector<Enemy> enemies;
 
     Menu *menu;
 

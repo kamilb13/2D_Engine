@@ -25,8 +25,8 @@ add_executable(2D_Engine
         CircleEventListener.h
         Enemy.cpp
         Enemy.h
-        Bullet.cpp
-        Bullet.h
+        Player.cpp
+        Player.h
 )
 
 find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)

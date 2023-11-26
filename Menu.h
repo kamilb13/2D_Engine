@@ -12,7 +12,6 @@ class Menu {
 private:
     int choice;
 
-
 public:
     Menu();
     void menuHandler(sf::Event event);

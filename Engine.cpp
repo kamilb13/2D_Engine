@@ -13,6 +13,10 @@ void Engine::game() {
     lineEventListener = new LineEventListener(&(this->line), &(this->window), &(this->lines));
     menu = new Menu();
 
+    Player *player = new Player(&(this->rectangles), window);
+    Enemy *enemy = new Enemy(sf::Color::Red, 30, 30, true);
+    enemy->init(100, 100);
+
     while(window.isOpen()) {
         //licznik fps
         sf::Font framerate_font;
@@ -25,16 +29,23 @@ void Engine::game() {
         sf::Event event;
 
         while(window.pollEvent(event)) {
-            menu->menuHandler(event);
-
+            menu->menuHandler(event);;
 
             if (menu->getChoice() == 1){
                 circleEventListener->eventHandler(event);
                 rectangleEventListener->eventHandler(event);
             } else if (menu->getChoice() == 2){
                 lineEventListener->eventHandler(event);
-                std::cout << menu->getChoice() << std::endl;
+                rectangleEventListener->eventHandler(event);
+//                std::cout << menu->getChoice() << std::endl
+            } else if (menu->getChoice() == 3) {
+                circles.clear();
+                rectangles.clear();
+                lines.clear();
+            } else if (menu->getChoice() == 4) {
+                // TODO Uruchomienie gry pod Enter
             }
+
             if (event.type == sf::Event::Closed) {
                 window.close();
                 break;
@@ -68,7 +79,6 @@ void Engine::game() {
         for (const auto& l : lines) {
             l.draw(window);
         }
-        line.draw(window);
 
         for (const auto& r : rectangles) {
             r.draw(window);
@@ -78,6 +88,16 @@ void Engine::game() {
             circ.draw(window);
         }
 
+        for (Enemy e : enemies) {
+            e.draw(window);
+        }
+
+        player->handleInput();
+        player->update();
+        player->draw();
+        enemy->draw(window);
+        enemy->shoot();
+        enemy->updateBullets(window, *player);
         line.draw(window);
         rectangle.draw(window);
         circle.draw(window);

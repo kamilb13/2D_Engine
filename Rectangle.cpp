@@ -36,3 +36,8 @@ void Rectangle::draw(sf::RenderWindow& window) const {
 sf::VertexArray Rectangle::getShape() {
     return this->shape;
 }
+
+// Nowa implementacja dla getGlobalBounds()
+sf::FloatRect Rectangle::getGlobalBounds() const {
+    return shape.getBounds();
+}

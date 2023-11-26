@@ -14,7 +14,7 @@ void CircleEventListener::eventHandler(sf::Event event) {
     float distance;
     sf::Vector2i center; // Srodek koła
     if (event.type == sf::Event::MouseButtonPressed){
-        if(event.key.code == sf::Mouse::Left){
+        if(event.mouseButton.button == sf::Mouse::Left){
             drawing = true;
             std::cout << "left click" << std::endl;
             circle->startDrawing(event.mouseButton.x, event.mouseButton.y);
@@ -34,10 +34,10 @@ void CircleEventListener::eventHandler(sf::Event event) {
         }
     }
 
-    else if (event.type == sf::Event::MouseButtonReleased){
-        if(event.mouseButton.button == sf::Mouse::Left){
-            drawing = false;
-            circles->push_back(*circle);
-        }
-    }
+//    else if (event.type == sf::Event::MouseButtonReleased){
+//        if (event.mouseButton.button == sf::Mouse::Left){
+//            drawing = false;
+//            circles->push_back(*circle);
+//        }
+//    }
 }
