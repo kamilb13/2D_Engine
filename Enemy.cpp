@@ -1,10 +1,24 @@
+//
+// Created by kamil on 26.11.2023.
+//
+
+#include <iostream>
 #include "Enemy.h"
+
 
 Enemy::Enemy(sf::Color color, int width, int height, bool enabled) {
     this->color = color;
     this->width = width;
     this->height = height;
     this->enabled = enabled;
+
+    // Wczytaj teksturę z pliku
+    if (enemyTexture.loadFromFile(R"(C:\Users\kamil\Desktop\Space-Invaders\graphics\my_ufo.png)")) {
+        enemy.setTexture(&enemyTexture); // Ustaw teksturę dla przeciwnika
+    } else {
+        // Obsłuż błąd wczytywania tekstury
+        std::cerr << "Error loading enemy texture!" << std::endl;
+    }
 };
 
 void Enemy::init(int x, int y) {
@@ -57,4 +71,17 @@ void Enemy::updateBullets(sf::RenderWindow &window, Player player) {
             ++bulletIt;
         }
     }
+}
+
+sf::FloatRect Enemy::getGlobalBounds() const {
+    // Zwróć globalne ograniczenia sprite'a
+    return sprite.getGlobalBounds();
+}
+
+std::vector<sf::RectangleShape> Enemy::getEnemies() {
+    return this->enemies;
+}
+
+sf::RectangleShape Enemy::getGlobalBounds() {
+    return this->enemy;
 }

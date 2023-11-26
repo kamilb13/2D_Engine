@@ -26,4 +26,3 @@ void Line::endDrawing() {
 void Line::draw(sf::RenderWindow& window) const {
     window.draw(shape);
 }
-

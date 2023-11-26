@@ -10,15 +10,13 @@ Circle::Circle(){
 }
 
 void Circle::startDrawing(float x, float y) {
-    drawing = true;
+    this->drawing = true;
     circleShape.setPosition(x, y);
 }
 
 void Circle::updateCircle(float r, sf::RenderWindow& window) {
-    if (drawing) {
-        circleShape.setRadius(r);
-        window.draw(circleShape);
-    }
+    circleShape.setRadius(r);
+    window.draw(circleShape);
 }
 
 void Circle::endDrawing() {

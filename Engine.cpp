@@ -1,4 +1,9 @@
 #include "Engine.h"
+#include "Player.h"
+#include "BitmapRectangle.h"
+#include "BitmapRectangleEventListener.h"
+#include "ResizableBitmap.h"
+#include "Enemy.h"
 
 void Engine::exit() {
     window.close();
@@ -11,13 +16,33 @@ void Engine::game() {
     rectangleEventListener = new RectangleEventListener(&(this->rectangle), &(this->window), &(this->rectangles));
     circleEventListener = new CircleEventListener(&(this->circle), &(this->window), &(this->circles));
     lineEventListener = new LineEventListener(&(this->line), &(this->window), &(this->lines));
+
+    bitmapRectangleEventListener = new BitmapRectangleEventListener(&(this->bitmapRectangle), &(this->window), &(this->bitmapRectangles));
+
     menu = new Menu();
 
-    Player *player = new Player(&(this->rectangles), window);
-    Enemy *enemy = new Enemy(sf::Color::Red, 30, 30, true);
-    enemy->init(100, 100);
 
+    //Enemy *enemy = new Enemy(sf::Color::Red, 60, 60, true);
+    //enemy->init(100, 100);
+
+    //tablica z czym chce kolizje
+    Collision collisionManager(&(this->bitmapRectangles), 5.0f);
+
+    Player *player = new Player(5.0f,  collisionManager, window);
+
+
+    BitmapRectangle bitmapRect(); //
+
+    // Ścieżka do pliku z bitmapą
+    //std::string imagePath = "C:\\Users\\kamil\\Desktop\\Space-Invaders\\graphics\\my_ufo.png"; //C:\Users\kamil\Desktop\Space-Invaders\graphic\smy_ufo.png
+
+    //ResizableBitmap resizableBitmap("C:\\Users\\kamil\\Desktop\\Space-Invaders\\graphics\\my_ufo.png");
+    bitmapRectangleEventListener->eventHandler(); //event
     while(window.isOpen()) {
+        if(bitmapRectangles.empty()){
+            std::cout << "WYGRALES" << std::endl;
+            exit();
+        }
         //licznik fps
         sf::Font framerate_font;
         framerate_font.loadFromFile("../resources/fonts/arial.ttf");
@@ -31,21 +56,15 @@ void Engine::game() {
         while(window.pollEvent(event)) {
             menu->menuHandler(event);
 
+            // Obsługa zdarzeń dla BitmapRectangle
+
             if (menu->getChoice() == 1){
                 circleEventListener->eventHandler(event);
-                rectangleEventListener->eventHandler(event);
+                //rectangleEventListener->eventHandler(event);  // TODO 1. POPRAWIĆ TO RYSOWANIE
             } else if (menu->getChoice() == 2){
                 lineEventListener->eventHandler(event);
-                rectangleEventListener->eventHandler(event);
-            } else if (menu->getChoice() == 3) {
-                circles.clear();
-                rectangles.clear();
-                lines.clear();
-            } else if (menu->getChoice() == 4) {
-                // TODO Uruchomienie gry pod Enter
-
+                std::cout << menu->getChoice() << std::endl;
             }
-
             if (event.type == sf::Event::Closed) {
                 window.close();
                 break;
@@ -72,36 +91,58 @@ void Engine::game() {
                 }
 
             }
+
         }   // koniec petli
 
-        window.clear(sf::Color::Black);
 
+
+        window.clear(sf::Color::Black);
+        //bitmapRect.draw(window);
         for (const auto& l : lines) {
             l.draw(window);
         }
-
+        line.draw(window);
+        /*
         for (const auto& r : rectangles) {
             r.draw(window);
         }
+         */
 
         for (Circle circ : circles) {
             circ.draw(window);
         }
+        //TODO NAPRAWIC BY TE BITMAPY SIE WYSWIETLALY i DODAC OSOBNA KOLIZJE
 
-        for (Enemy e : enemies) {
-            e.draw(window);
+        for (const auto& br : bitmapRectangles) {
+            br.draw(window);
         }
+
+        for (auto& br : bitmapRectangles) {
+            sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
+            rectangle.updateRectangle(mousePosition);
+            br.shoot();
+            br.updateBullets(window, player->getGlobalBounds());
+        }
+
+        //window.clear(sf::Color::White); // Dodaj to przed rysowaniem
+        //resizableBitmap.update();
+        //resizableBitmap.draw(window);
+        //window.display();
 
         player->handleInput();
         player->update();
         player->draw();
 
-        enemy->draw(window);
-        enemy->shoot();
-        enemy->updateBullets(window, *player);
+        //enemy->draw(window);
+        //enemy->shoot();
+        //enemy->updateBullets(window, *player);
 
+
+
+
+        //bitmapRectangle.draw(window);
         line.draw(window);
-        rectangle.draw(window);
+        //rectangle.draw(window);
         circle.draw(window);
         window.draw(rect);
         window.draw(framerate);
@@ -118,14 +159,6 @@ void Engine::sfml_init(bool fullscreen, int width, int height) {
         window.create(sf::VideoMode::getDesktopMode(), "Engine 2D", sf::Style::Fullscreen);
     } else {
         window.create(sf::VideoMode(width, height), "Engine 2D", sf::Style::Default);
-    }
-}
-
-bool Engine::demo_init(bool enabled) {
-    if (enabled) {
-        return true;
-    } else {
-        return false;
     }
 }
 

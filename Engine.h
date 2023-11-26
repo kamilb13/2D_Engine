@@ -15,8 +15,7 @@
 #include "CircleEventListener.h"
 #include "Menu.h"
 #include "LineEventListener.h"
-#include "Player.h"
-#include "Enemy.h"
+#include "BitmapRectangleEventListener.h"
 
 class Engine {
 private:
@@ -35,9 +34,12 @@ private:
     std::vector<Circle> circles;
     CircleEventListener *circleEventListener;
 
-    std::vector<Enemy> enemies;
+    BitmapRectangle bitmapRectangle;
+    std::vector<BitmapRectangle> bitmapRectangles;
+    BitmapRectangleEventListener *bitmapRectangleEventListener;
 
     Menu *menu;
+
 
     void exit();
 
@@ -46,7 +48,6 @@ public:
     void game();
     void set_fps(int fps);
     void sfml_init(bool fullscreen, int width, int height);
-    bool demo_init(bool enabled);
 
 };
 
