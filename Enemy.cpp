@@ -13,7 +13,7 @@ Enemy::Enemy(sf::Color color, int width, int height, bool enabled) {
     this->enabled = enabled;
 
     // Wczytaj teksturę z pliku
-    if (enemyTexture.loadFromFile(R"(C:\Users\kamil\Desktop\Space-Invaders\graphics\my_ufo.png)")) {
+    if (enemyTexture.loadFromFile("../resources/bitmaps/my_ufo.png")) {
         enemy.setTexture(&enemyTexture); // Ustaw teksturę dla przeciwnika
     } else {
         // Obsłuż błąd wczytywania tekstury

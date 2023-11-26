@@ -1,8 +1,5 @@
-#include <iostream>
 #include "BitmapRectangle.h"
-#include "Player.h"
 
-//TODO DLACZEGO NIE MOGE Z PARAMETRU?? WYWALA BLAD ZE BRAK KONSTRUKTORA ENGINE?!?!
 BitmapRectangle::BitmapRectangle() : drawing(false) { //std::string pathOfEnemy
     // Ustawienie koloru prostokąta na przezroczysty
     shape = sf::VertexArray(sf::Quads, 4);
@@ -12,7 +9,7 @@ BitmapRectangle::BitmapRectangle() : drawing(false) { //std::string pathOfEnemy
     shape[3].color = sf::Color::Transparent;
 
     // Wczytanie tekstury z pliku PNG
-    if (!texture.loadFromFile(R"(C:\Users\kamil\Desktop\Space-Invaders\graphics\my_ufo.png)")) {
+    if (!texture.loadFromFile("../resources/bitmaps/my_ufo.png")) {
         std::cerr << "Nie udało się wczytać pliku tekstury." << std::endl;
     }
 

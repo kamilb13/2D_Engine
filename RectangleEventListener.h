@@ -8,7 +8,7 @@
  */
 #include "Rectangle.h"
 #include <SFML/Graphics.hpp>
-#include "iostream"
+#include <iostream>
 
 #ifndef INC_2D_ENGINE_RECTANGLEEVENTLISTENER_H
 #define INC_2D_ENGINE_RECTANGLEEVENTLISTENER_H
@@ -31,7 +31,7 @@ public:
 * @param *window Okno w ktorym rysujemy
 * @param *rectangles Wektor do ktorego zapisujemy prostokaty
 */
-    RectangleEventListener(Rectangle *rectangle, sf::RenderWindow *window,  std::vector<Rectangle> *rectangles)
+    RectangleEventListener(Rectangle *rectangle, sf::RenderWindow *window,  std::vector<Rectangle> *rectangles);
     /**
 * @brief Funkcja eventHandler
  * Funkcja czekajaca na zdarzenie zwiazene z rysowaniem prostokata

@@ -16,6 +16,10 @@ void Menu::menuHandler(sf::Event event) {
             this->choice = 1;
         } else if (event.key.code == sf::Keyboard::Num2){
             this->choice = 2;
+        } else if (event.key.code == sf::Keyboard::Num3) {
+            this->choice = 3;
+        } else if (event.key.code == sf::Keyboard::Enter) {
+            this->choice = 4;
         }
     }
 }

@@ -16,6 +16,9 @@
 #include "Menu.h"
 #include "LineEventListener.h"
 #include "BitmapRectangleEventListener.h"
+#include "Player.h"
+#include "BitmapRectangle.h"
+#include "Enemy.h"
 
 class Engine {
 private:
@@ -40,15 +43,12 @@ private:
 
     Menu *menu;
 
-
     void exit();
 
 public:
-    sf::RectangleShape drawRectangle(sf::Color color, int width, int height, int x, int y);
     void game();
     void set_fps(int fps);
     void sfml_init(bool fullscreen, int width, int height);
-
 };
 
 #endif //ENGINE_H

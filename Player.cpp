@@ -32,7 +32,7 @@ Player::Player(float bulletSpeed, Collision &collisionManager, sf::RenderWindow 
     //this->bitmapRectangles = bitmapRectangle;
 
     // Wczytaj teksturę z pliku
-    if (playerTexture.loadFromFile(R"(C:\Users\kamil\Desktop\Space-Invaders\graphics\player.png)")) {
+    if (playerTexture.loadFromFile("../resources/bitmaps/player.png")) {
         playerShape.setTexture(&playerTexture); // Ustaw teksturę dla gracza
     } else {
         // Obsłuż błąd wczytywania tekstury
