@@ -7,7 +7,7 @@
 void Engine::exit() {
     window.close();
 }
-
+//TODO BEZUZYTECZNA KLASA
 void Engine::game() {
     sf::Clock framerate_clock;
     float speed = 10.f;
